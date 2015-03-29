@@ -11,6 +11,8 @@ var {
   Text,
   View,
   NavigatorIOS,
+  TouchableHighlight,
+  WebView,
 } = React;
 
 var RouterTest = React.createClass({
@@ -35,12 +37,21 @@ var MainListView = React.createClass({
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js{'\n'}
-          Press Cmd+R to reload
-        </Text>
+        <TouchableHighlight onPress={this._onPress}>
+          <Text style={styles.instructions}>
+            To get started, edit index.ios.js{'\n'}
+            Press Cmd+R to reload
+          </Text>
+        </TouchableHighlight>
       </View>
     );
+  },
+  _onPress: function() {
+    this.props.navigator.push({
+      title: "xxx",
+      component: WebView,
+      passProps: {url: "http://betahikaru.com"}
+    });
   },
 });
 
