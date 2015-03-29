@@ -10,9 +10,25 @@ var {
   StyleSheet,
   Text,
   View,
+  NavigatorIOS,
 } = React;
 
 var RouterTest = React.createClass({
+  render: function() {
+    return (
+      <NavigatorIOS
+        style={styles.natigator}
+        initialRoute={{
+          component: MainListView,
+          title: 'RouterTest',
+        }}
+        tintColor="#4A90C7"
+      />
+    );
+  },
+});
+
+var MainListView = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
@@ -25,12 +41,15 @@ var RouterTest = React.createClass({
         </Text>
       </View>
     );
-  }
+  },
 });
 
 var styles = StyleSheet.create({
-  container: {
+  natigator: {
     flex: 1,
+  },
+  container: {
+      flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
