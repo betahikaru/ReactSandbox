@@ -3,14 +3,14 @@
   "link":"https://google.com",
   "description":"Google",
   "user": {
-    "name":"user1",
-  },
+    "name":"user1"
+  }
 },
 {
   "title":"title2",
   "link":"https://google.com",
   "description":"Google",
   "user": {
-    "name":"user2",
-  },
+    "name":"user2"
+  }
 }
