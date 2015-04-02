@@ -1,16 +1,20 @@
 {
-  "title":"title1",
-  "link":"https://google.com",
-  "description":"Google",
-  "user": {
-    "name":"user1"
-  }
-},
-{
-  "title":"title2",
-  "link":"https://google.com",
-  "description":"Google",
-  "user": {
-    "name":"user2"
-  }
+    "data": [
+        {
+            "title": "title1",
+            "link": "https://google.com",
+            "description": "Google",
+            "user": {
+                "name": "user1"
+            }
+        },
+        {
+            "title": "title2",
+            "link": "https://google.com",
+            "description": "Google",
+            "user": {
+                "name": "user3"
+            }
+        }
+    ]
 }

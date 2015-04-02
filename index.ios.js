@@ -13,6 +13,8 @@ var {
   NavigatorIOS,
   TouchableHighlight,
   WebView,
+  ListView,
+  ActivityIndicatorIOS
 } = React;
 
 var RouterTest = React.createClass({
@@ -48,11 +50,64 @@ var MainListView = React.createClass({
   },
   _onPress: function() {
     this.props.navigator.push({
-      title: "xxx",
-      component: WebView,
-      passProps: {url: "http://betahikaru.com"}
+      title: "Test Data",
+      // component: WebView,
+      // passProps: {url: "http://betahikaru.com"}
+      component: TestDataList,
+      passProps: {url: "http://betahikaru.com/testdata.json"}
     });
   },
+});
+
+var TestDataList = React.createClass({
+  getInitialState: function() {
+    return {
+      dataSource: null,
+      loaded: false
+    };
+  },
+
+  componentDidMount: function() {
+    this.fetchData();
+  },
+
+  fetchData: function() {
+    fetch(this.props.url)
+    .then((response) => response.json())
+    .then((responseData) => {
+      var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+      this.setState({
+        dataSource: ds.cloneWithRows(responseData.data),
+        loaded: true
+      });
+    })
+    .done();
+  },
+
+  renderLoadingView: function() {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicatorIOS animating={true} size='small' />
+      </View>
+    );
+  },
+
+  render: function() {
+    if (!this.state.loaded) {
+      return this.renderLoadingView();
+    }
+    return (
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={(rowData) =>
+          <Text style={styles.listRow}>
+            {rowData.title}
+          </Text>
+        }
+        style={styles.listView}
+      />
+    );
+  }
 });
 
 var styles = StyleSheet.create({
@@ -73,6 +128,13 @@ var styles = StyleSheet.create({
   instructions: {
     textAlign: 'center',
     color: '#333333',
+  },
+  listView: {
+  },
+  listRow: {
+    textAlign: 'center',
+    color: '#333333',
+    height: 20,
   },
 });
 
